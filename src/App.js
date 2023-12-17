@@ -1,16 +1,17 @@
 
+import React from 'react';
 import './App.css';
 import Header from './components/Header';
 import Bio from './components/Bio';
+import InventoryControl from './components/InventoryControl';
 
 function App() {
 	return (
-		<div className="App">
-			<>
-				<Header />
-				<Bio />
-			</>
-		</div>
+		<React.Fragment>
+			<Header />
+			<Bio />
+			<InventoryControl />
+		</React.Fragment>
 	);
 }
 

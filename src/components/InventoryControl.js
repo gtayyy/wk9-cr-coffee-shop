@@ -44,7 +44,7 @@ class InventoryControl extends React.Component {
 		.filter(coffeeSku => coffeeSku.id !== this.state.selectedCoffee.id)
 		.concat(skuToEdit);
 		this.setState({
-			mainCoffeeList: editedMainCoffeeList;
+			mainCoffeeList: editedMainCoffeeList,
 			editing: false,
 			selectedCoffee: null
 		});
@@ -72,3 +72,5 @@ class InventoryControl extends React.Component {
 		);
 	}
 }
+
+export default InventoryControl;

@@ -12,7 +12,9 @@ function CoffeeList(props) {
 					origin={coffeeSku.origin}
 					price={coffeeSku.price}
 					roast={coffeeSku.roast}
-					amount={coffeeSku.amount}/>
+					amount={coffeeSku.amount}
+					id={coffeeSku.id}
+					key={coffeeSku.id} />
 					)}
 		</React.Fragment>
 	);

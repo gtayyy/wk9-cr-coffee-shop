@@ -1,9 +1,9 @@
 import React from "react";
-import { ReactPropTypes } from "react";
-
+import GeneralForm from './GeneralForm';
+import PropTypes from 'prop-types';
 
 function EditForm (props) {
-	const { coffee } = props;
+	const { coffeeSku } = props;
 
 	function handleEditFormSubmission(e) {
 		e.preventDefault();
@@ -11,17 +11,17 @@ function EditForm (props) {
 	}
 
 	return (
-		<>
+		<React.Fragment>
 			<GeneralForm
 				formSubmissionHandler={handleEditFormSubmission}
 				buttonText="Update SKU Details" />
-		</>
+		</React.Fragment>
 	);
 }
 
-EditForm.ReactPropTypes = {
-	coffee: <ReactPropTypes className="object"></ReactPropTypes>,
-	onEditCoffee: <ReactPropTypes className="function"></ReactPropTypes>
+EditForm.propTypes = {
+	coffeeSku: PropTypes.object,
+	onEditCoffee: PropTypes.func
 };
 
 export default EditForm;
