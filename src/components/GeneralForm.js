@@ -1,9 +1,9 @@
 import React from "react";
-import { ReactPropTypes } from "react";
+import PropTypes from 'prop-types';
 
 function GeneralForm(props) {
 	return (
-		<>
+		<React.Fragment>
 			<form onSubmit={props.formSubmissionHandler}>
 				<input
 					type='text'
@@ -15,25 +15,25 @@ function GeneralForm(props) {
 					placeholder="Origin" />
 				<input
 					type='text'
-					name='price'
-					placeholder="$/pound" />
-				<input
-					type='text'
 					name='roast'
 					placeholder="Roast" />
 				<input
-					type='text'
+					type='number'
+					name='price'
+					placeholder="$/pound" />
+				<input
+					type='number'
 					name='pounds'
 					placeholder="Lbs Received" />
 				<button type="submit">{props.buttonText}</button>
 			</form>
-		</>
+		</React.Fragment>
 	);
 }
 
-GeneralForm.ReactPropTypes = {
-	formSubmissionHandler: ReactPropTypes.function,
-	buttonText: ReactPropTypes.string
+GeneralForm.propTypes = {
+	formSubmissionHandler: PropTypes.func,
+	buttonText: PropTypes.string
 };
 
 export default GeneralForm;
