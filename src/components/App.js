@@ -1,9 +1,9 @@
 
 import React from 'react';
 import './App.css';
-import Header from './components/Header';
-import Bio from './components/Bio';
-import InventoryControl from './components/InventoryControl';
+import Header from './Header';
+import Bio from './Bio';
+import InventoryControl from './InventoryControl';
 
 function App() {
 	return (
