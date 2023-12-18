@@ -69,16 +69,16 @@ class InventoryControl extends React.Component {
 		});
 	};
 
-	handleUpdatingCoffeeList = (updatedCoffeeList) => {
+	handleUpdatingCoffeeList = (updatedList) => {
 		const updatedCoffeeList = this.state.mainCoffeeList.map(sku => {
 			if (sku.id === this.state.selectedId) {
 				return {
-					...item,
-					name: updatedCoffeeList.name,
-					origin: updatedCoffeeList.origin,
-					roast: updatedCoffeeList.roast,
-					price: updatedCoffeeList.price,
-					amount: updatedCoffeeList.amount
+					...sku,
+					name: updatedList.name,
+					origin: updatedList.origin,
+					roast: updatedList.roast,
+					price: updatedList.price,
+					amount: updatedList.amount
 				};
 			}
 			return sku;
