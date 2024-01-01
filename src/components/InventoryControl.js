@@ -4,6 +4,7 @@ import CoffeeList from "./CoffeeList";
 import EditForm from "./EditForm";
 import { v4 } from 'uuid';
 import Cart from "./Cart"; 
+import './../CSS/InventoryControl.css';
 
 class InventoryControl extends React.Component {
 
@@ -20,6 +21,7 @@ class InventoryControl extends React.Component {
 					name: 'Morning Side',
 					origin: 'Far faaaar away',
 					roast: 'Dark Roast',
+					amount: '15',
 					price: '$27.99/lb',
 					id: v4()
 				},
@@ -27,6 +29,7 @@ class InventoryControl extends React.Component {
 					name: 'Afternoon Delight',
 					origin: 'Somewhere sunny',
 					roast: 'Medium Roast',
+					amount: '52',
 					price: '$22.99/lb',
 					id: v4()
 				},
@@ -34,6 +37,7 @@ class InventoryControl extends React.Component {
 					name: 'Workin Overtime',
 					origin: 'The back alley',
 					roast: 'Dark Roast',
+					amount: '36',
 					price: '$11.99/lb',
 					id: v4()
 				}
@@ -112,7 +116,8 @@ class InventoryControl extends React.Component {
 				currentlyVisibleState = <NewSkuForm onNewSkuCreation={this.handleAddingNewSkuToList} />;
 				buttonText = "Return to Coffee Menu";
 			} else if (this.state.updateFormVisibleOnPage) {
-				currentlyVisibleState = <EditForm onEditFormCreation={this.handleUpdatingCoffeeList} />;
+				currentlyVisibleState = <EditForm onEditFormCreation={this.handleUpdatingCoffeeList}
+				id={this.state.selectedId} />; 
 				buttonText = "Return to Coffee Menu";
 			} else if (this.state.cartVisibleOnPage) {
 				cartButtonText = "Return to Coffee Menu"
@@ -132,95 +137,26 @@ class InventoryControl extends React.Component {
 						<CoffeeList
 							addToCart={this.addToCart}
 							handleUpdate={this.handleUpdateClick}
-							coffeeInStock={this.state.mainCoffeeList}
+							skuInStock={this.state.mainCoffeeList}
 						/>
-						<div className="centerButtons">
+						{/* <div className="centerButtons">
 							<button onClick={this.handleAddClick}>{buttonText}</button>
 							<button onClick={this.handleCartClick}>{cartButtonText}</button>
-						</div>
+						</div> */}
 					</React.Fragment>)
 			}
 
-			return (
-				<React.Fragment>
-					{currentlyVisibleState}
-				</React.Fragment>
-			);
-		}
-
+		return (
+			<React.Fragment>
+				{currentlyVisibleState}
+				<div className="rightAlignButtons">
+					<button className="buttonStyle" onClick={this.handleAddClick}>{buttonText}</button>
+					<button className="buttonStyle" onClick={this.handleCartClick}>{cartButtonText}</button>
+				</div>
+			</React.Fragment>
+		);
 	}
 
+}
+
 	export default InventoryControl;
-	
-
-
-
-
-
-// 		this.state = {
-// 			formVisibleOnPage: false,
-// 			mainCoffeeList: [],
-// 			selectedCoffee: null,
-// 			editing: false
-// 		};
-// 	}
-// 	handleClick = () => {
-// 		if (this.state.selectedCoffee != null) {
-// 			this.setState({
-// 				formVisibleOnPage: false,
-// 				selectedCoffee: null,
-// 				editing: false
-// 			});
-// 		} else {
-// 			this.setState(prevState => ({ formVisibleOnPage: !prevState.formVisibleOnPage }));
-// 		}
-// 	}
-// 	handleAddingNewSkuToList = (newSku) => {
-// 		const newMainCoffeeList = this.state.mainCoffeeList.concat(newSku);
-// 		this.setState({
-// 			mainCoffeeList: newMainCoffeeList,
-// 			formVisibleOnPage: false
-// 		});
-// 	}
-// 	handleChangingSelectedCoffee = (id) => {
-// 		const selectedCoffee = this.state.mainCoffeeList.filter(coffeeSku => coffeeSku.id === id)[0];
-// 		this.setState({ selectedCoffee: selectedCoffee });
-// 	}
-// 	handleEditClick = () => {
-// 		this.setState({ editing: true });
-// 	}
-// 	handleEditingSkuInList = (skuToEdit) => {
-// 		const editedMainCoffeeList = this.state.mainCoffeeList
-// 		.filter(coffeeSku => coffeeSku.id !== this.state.selectedCoffee.id)
-// 		.concat(skuToEdit);
-// 		this.setState({
-// 			mainCoffeeList: editedMainCoffeeList,
-// 			editing: false,
-// 			selectedCoffee: null
-// 		});
-// 	}
-// 	render() {
-// 		let currentVisibleState = null;
-// 		let buttonText = null;
-
-// 		if (this.state.editing) {
-// 			currentVisibleState = <EditForm coffeeSku={this.state.selectedCoffee} onEditCoffee={this.handleEditingSkuInList} />
-// 			buttonText = "Return to Coffee List";
-// 		} else if (this.state.formVisibleOnPage) {
-// 			currentVisibleState = <NewSkuForm onNewSkuCreation={this.handleAddingNewSkuToList} />
-// 			buttonText = "Return to Coffee List";
-// 		} else {
-// 			currentVisibleState = <CoffeeList coffeeList={this.state.mainCoffeeList} onCoffeeSkuSelection={this.handleChangingSelectedCoffee} />
-// 			buttonText = "Add SKU";
-// 		}
-
-// 		return (
-// 			<React.Fragment>
-// 				{currentVisibleState}
-// 				<button onClick={this.handleClick}>{buttonText}</button>
-// 			</React.Fragment>
-// 		);
-// 	}
-// }
-
-// export default InventoryControl;

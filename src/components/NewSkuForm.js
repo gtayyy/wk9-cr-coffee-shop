@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from 'prop-types';
-// import GeneralForm from './GeneralForm';
 import { v4 } from 'uuid';
 
 function NewSkuForm(props) {
@@ -48,14 +47,5 @@ function NewSkuForm(props) {
 NewSkuForm.propTypes = {
 	onNewSkuCreation: PropTypes.func
 };
-
-// 	return (
-// 		<React.Fragment>
-// 			<GeneralForm
-// 				formSubmissionHandler={handleNewSkuFormSubmission}
-// 				buttonText="Add SKU" />
-// 		</React.Fragment>
-// 	);
-// }
 
 export default NewSkuForm;
