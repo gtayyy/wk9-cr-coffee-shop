@@ -17,7 +17,7 @@ describe('coffeeListReducer', () => {
 	});
 
 	test('Should successfully add a new coffee SKU to mainCoffeeList', () => {
-		const { name, origin, roast, price, lbsOnHand } = skuData;
+		const { name, origin, roast, price, lbsOnHand, id } = skuData;
 		action = {
 			type: 'ADD_SKU',
 			name: name,
@@ -38,5 +38,5 @@ describe('coffeeListReducer', () => {
 			}
 		});
 	});
-	
+
 });
