@@ -22,4 +22,26 @@ describe("rootReducer", () => {
 		expect(store.getState().formVisibleOnPage).toEqual(formVisibleReducer(undefined, { type: null }));
 	});
 
+	test('Check that ADD_SKU action works for coffeeListReducer and root reducer', () => {
+		const action = {
+			type: 'ADD_SKU',
+			name: 'Double or Nothing',
+			origin: 'Canada Eh',
+			roast: 'Medium',
+			price: '27.99',
+			lbsOnHand: '130',
+			id: 1
+		}
+		store.dispatch(action);
+		expect(store.getState().mainCoffeeList).toEqual(coffeeListReducer(undefined, action));
+	});
+
+	test('Check that TOGGLE_FORM action works for formVisibleReducer and root reducer', () => {
+		const action = {
+			type: 'TOGGLE_FORM'
+		}
+		store.dispatch(action);
+		expect(store.getState().formVisibleOnPage).toEqual(formVisibleReducer(undefined, action));
+	});
+	
 });
