@@ -4,6 +4,7 @@ import CoffeeList from "./CoffeeList";
 import EditForm from "./EditForm";
 import { v4 } from 'uuid';
 import Cart from "./Cart"; 
+import { connect } from 'react-redux';
 import './../CSS/InventoryControl.css';
 
 class InventoryControl extends React.Component {
@@ -16,32 +17,32 @@ class InventoryControl extends React.Component {
 			updateFormVisibleOnPage: false,
 			cartVisibleOnPage: false,
 			selectedId: null,
-			mainCoffeeList: [
-				{
-					name: 'Morning Side',
-					origin: 'Far faaaar away',
-					roast: 'Dark Roast',
-					amount: '15',
-					price: '$27.99/lb',
-					id: v4()
-				},
-				{
-					name: 'Afternoon Delight',
-					origin: 'Somewhere sunny',
-					roast: 'Medium Roast',
-					amount: '52',
-					price: '$22.99/lb',
-					id: v4()
-				},
-				{
-					name: 'Workin Overtime',
-					origin: 'The back alley',
-					roast: 'Dark Roast',
-					amount: '36',
-					price: '$11.99/lb',
-					id: v4()
-				}
-			],
+			// mainCoffeeList: [
+			// 	{
+			// 		name: 'Morning Side',
+			// 		origin: 'Far faaaar away',
+			// 		roast: 'Dark Roast',
+			// 		amount: '15',
+			// 		price: '$27.99/lb',
+			// 		id: v4()
+			// 	},
+			// 	{
+			// 		name: 'Afternoon Delight',
+			// 		origin: 'Somewhere sunny',
+			// 		roast: 'Medium Roast',
+			// 		amount: '52',
+			// 		price: '$22.99/lb',
+			// 		id: v4()
+			// 	},
+			// 	{
+			// 		name: 'Workin Overtime',
+			// 		origin: 'The back alley',
+			// 		roast: 'Dark Roast',
+			// 		amount: '36',
+			// 		price: '$11.99/lb',
+			// 		id: v4()
+			// 	}
+			// ],
 			cartItems: []
 		};
 	}
@@ -66,27 +67,56 @@ class InventoryControl extends React.Component {
 	};
 
 	handleAddingNewSkuToList = (newSku) => {
-		const newMainCoffeeList = this.state.mainCoffeeList.concat(newSku);
-		this.setState({
-			mainCoffeeList: newMainCoffeeList,
-			addFormVisibleOnPage: false
-		});
+		const { dispatch } = this.props;
+		const { name, origin, roast, price, amount, id } = newSku;
+		const action = {
+			type: 'ADD_SKU',
+			name: name,
+			origin: origin,
+			roast: roast, 
+			price: price,
+			amount: amount,
+			id: id
+		}
+		dispatch(action);
+		this.setState({ formVisibleOnPage: false });
+		// const newMainCoffeeList = this.state.mainCoffeeList.concat(newSku);
+		// this.setState({
+		// 	mainCoffeeList: newMainCoffeeList,
+		// 	addFormVisibleOnPage: false
+		// });
 	};
 
 	handleUpdatingCoffeeList = (updatedList) => {
-		const updatedCoffeeList = this.state.mainCoffeeList.map(sku => {
-			if (sku.id === this.state.selectedId) {
-				return {
-					...sku,
-					name: updatedList.name,
-					origin: updatedList.origin,
-					roast: updatedList.roast,
-					price: updatedList.price,
-					amount: updatedList.amount
-				};
-			}
-			return sku;
+		const { dispatch } = this.props;
+		const { name, origin, roast, price, amount, id } = skuToUpdate;
+		const action = { 
+			type: 'ADD_SKU',
+			name: name,
+			origin: origin,
+			roast: roast, 
+			price: price,
+			amount: amount,
+			id: id
+		}
+		dispatch(action);
+		this.setState({
+			editing: false,
+			selectedSku: null
 		});
+		// const updatedCoffeeList = this.state.mainCoffeeList.map(sku => {
+		// 	if (sku.id === this.state.selectedId) {
+		// 		return {
+		// 			...sku,
+		// 			name: updatedList.name,
+		// 			origin: updatedList.origin,
+		// 			roast: updatedList.roast,
+		// 			price: updatedList.price,
+		// 			amount: updatedList.amount
+		// 		};
+		// 	}
+		// 	return sku;
+		// });
 
 		this.setState({
 			mainCoffeeList: updatedCoffeeList,
@@ -137,7 +167,7 @@ class InventoryControl extends React.Component {
 						<CoffeeList
 							addToCart={this.addToCart}
 							handleUpdate={this.handleUpdateClick}
-							skuInStock={this.state.mainCoffeeList}
+							skuInStock={this.props.mainCoffeeList}
 						/>
 						{/* <div className="centerButtons">
 							<button onClick={this.handleAddClick}>{buttonText}</button>
@@ -159,4 +189,16 @@ class InventoryControl extends React.Component {
 
 }
 
-	export default InventoryControl;
+InventoryControl.propTypes = {
+	mainCoffeeList: PropTypes.object
+};
+
+const mapStateToProps = state => {
+	return {
+		mainCoffeeList: state
+	}
+}
+
+InventoryControl = connect(mapStateToProps)(InventoryControl);
+
+export default InventoryControl;
