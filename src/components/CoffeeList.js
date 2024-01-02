@@ -6,7 +6,7 @@ function CoffeeList(props) {
 	return (
 		<React.Fragment>
 			<hr />
-			{props.skuInStock.map((sku, index) =>
+			{Object.values(props.coffeeList).map((sku) =>
 				<CoffeeSku
 					name={sku.name}
 					origin={sku.origin}
@@ -23,7 +23,7 @@ function CoffeeList(props) {
 }
 
 CoffeeList.propTypes = {
-	skuInStock: PropTypes.array,
+	skuInStock: PropTypes.object,
 	handleEdit: PropTypes.func,
 	addToCart: PropTypes.func
 };
