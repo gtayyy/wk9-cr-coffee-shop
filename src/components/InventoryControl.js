@@ -5,6 +5,7 @@ import EditForm from "./EditForm";
 import { v4 } from 'uuid';
 import Cart from "./Cart"; 
 import { connect } from 'react-redux';
+import PropTypes from "prop-types";
 import './../CSS/InventoryControl.css';
 
 class InventoryControl extends React.Component {
@@ -13,9 +14,9 @@ class InventoryControl extends React.Component {
 		super(props);
 		this.addToCart = this.addToCart.bind(this);
 		this.state = {
-			addFormVisibleOnPage: false,
-			updateFormVisibleOnPage: false,
-			cartVisibleOnPage: false,
+			// addFormVisibleOnPage: false,
+			// updateFormVisibleOnPage: false,
+			// cartVisibleOnPage: false,
 			selectedId: null,
 			// mainCoffeeList: [
 			// 	{
@@ -79,7 +80,7 @@ class InventoryControl extends React.Component {
 			id: id
 		}
 		dispatch(action);
-		this.setState({ formVisibleOnPage: false });
+		// this.setState({ formVisibleOnPage: false });
 		// const newMainCoffeeList = this.state.mainCoffeeList.concat(newSku);
 		// this.setState({
 		// 	mainCoffeeList: newMainCoffeeList,
@@ -120,7 +121,7 @@ class InventoryControl extends React.Component {
 
 		this.setState({
 			mainCoffeeList: updatedCoffeeList,
-			updateFormVisibleOnPage: false
+			// updateFormVisibleOnPage: false
 		});
 	};
 
@@ -195,7 +196,8 @@ InventoryControl.propTypes = {
 
 const mapStateToProps = state => {
 	return {
-		mainCoffeeList: state
+		mainCoffeeList: state.mainCoffeeList,
+		formVisibleOnPage: state.formVisibleOnPage
 	}
 }
 
